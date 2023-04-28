@@ -39,7 +39,7 @@ nums.forEach((button) => {
             display(calculate(+numsArr.join(''), operator));
             operator = "";
             numsArr = [];
-        } else {
+        } else if(!(button.innerHTML === "=")) {
             display(calculate(+numsArr.join(''), operator));
             operator = button.innerHTML;
             numsArr = [];
