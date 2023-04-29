@@ -11,7 +11,7 @@ const display = (num) => {
 const calculate = (num, operator) => {
     if(operator === "/" && total === 0 || num === 0) {
         return num;
-    } else if(!(operator)) {
+    } else if(!(operator) && total === 0) {
         total = num;
         return total;
     } else {
@@ -37,12 +37,16 @@ nums.forEach((button) => {
             screen.textContent = "0";
         } else if(button.innerHTML === "=" && total > 0) {
             display(calculate(+numsArr.join(''), operator));
-            operator = "";
+            operator = false;
             numsArr = [];
         } else if(!(button.innerHTML === "=")) {
-            display(calculate(+numsArr.join(''), operator));
-            operator = button.innerHTML;
-            numsArr = [];
+            if(numsArr.length === 0) {
+                operator = button.innerHTML;
+            } else {
+                display(calculate(+numsArr.join(''), operator));
+                operator = button.innerHTML;
+                numsArr = [];
+            }
         }
     });
 });
